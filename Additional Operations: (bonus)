@@ -1,0 +1,129 @@
+#include <stdio.h>
+#include <math.h>
+
+// Function prototypes
+double add(double a, double b);
+double subtract(double a, double b);
+double multiply(double a, double b);
+double divide(double a, double b);
+double power(double base, double exponent);
+double modulus(double a, double b);
+double percentage(double value, double percent);
+int gcd(int a, int b);
+int lcm(int a, int b);
+double floorValue(double x);
+double ceilValue(double x);
+
+int main() {
+    char operator;
+    double operand1, operand2, result;
+
+    printf("Enter operator (+, -, *, /, ^, %%, G, L, F, C): ");
+    scanf(" %c", &operator);
+
+    if (operator == 'G' || operator == 'L') {
+        int num1, num2;
+        printf("Enter two integers: ");
+        scanf("%d %d", &num1, &num2);
+
+        if (operator == 'G') {
+            result = gcd(num1, num2);
+            printf("GCD: %lf\n", result);
+        } else if (operator == 'L') {
+            result = lcm(num1, num2);
+            printf("LCM: %lf\n", result);
+        }
+    } else {
+        printf("Enter two operands: ");
+        scanf("%lf %lf", &operand1, &operand2);
+
+        switch (operator) {
+            case '+':
+                result = add(operand1, operand2);
+                break;
+            case '-':
+                result = subtract(operand1, operand2);
+                break;
+            case '*':
+                result = multiply(operand1, operand2);
+                break;
+            case '/':
+                result = divide(operand1, operand2);
+                break;
+            case '^':
+                result = power(operand1, operand2);
+                break;
+            case '%':
+                result = modulus(operand1, operand2);
+                break;
+            case 'F':
+                result = floorValue(operand1);
+                break;
+            case 'C':
+                result = ceilValue(operand1);
+                break;
+            default:
+                printf("Invalid operator!\n");
+                return 1; // Exit the program with an error code
+        }
+
+        printf("Result: %lf\n", result);
+    }
+
+    return 0;
+}
+
+// Function definitions
+
+double add(double a, double b) {
+    return a + b;
+}
+
+double subtract(double a, double b) {
+    return a - b;
+}
+
+double multiply(double a, double b) {
+    return a * b;
+}
+
+double divide(double a, double b) {
+    if (b != 0) {
+        return a / b;
+    } else {
+        printf("Error: Division by zero!\n");
+        return 0; // You can handle this case differently if needed
+    }
+}
+
+double power(double base, double exponent) {
+    return pow(base, exponent);
+}
+
+double modulus(double a, double b) {
+    return fmod(a, b);
+}
+
+double percentage(double value, double percent) {
+    return value * (percent / 100.0);
+}
+
+int gcd(int a, int b) {
+    if (b == 0) {
+        return a;
+    } else {
+        return gcd(b, a % b);
+    }
+}
+
+int lcm(int a, int b) {
+    return (a * b) / gcd(a, b);
+}
+
+double floorValue(double x) {
+    return floor(x);
+}
+
+double ceilValue(double x) {
+    return ceil(x);
+}
