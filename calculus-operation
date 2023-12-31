@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <math.h>
+
+// Function to calculate the derivative of a given function at a specific point
+double calculateDerivative(double (*function)(double), double x, double h) {
+    return (function(x + h) - function(x)) / h;
+}
+
+// Function to calculate the indefinite integral of a given function
+double calculateIndefiniteIntegral(double (*function)(double), double a, double b, int n) {
+    double result = 0.0;
+    double h = (b - a) / n;
+
+    for (int i = 0; i < n; ++i) {
+        result += function(a + i * h) * h;
+    }
+
+    return result;
+}
+
+// Function to calculate the definite integral of a given function within a given range
+double calculateDefiniteIntegral(double (*function)(double), double a, double b, int n) {
+    double result = 0.0;
+    double h = (b - a) / n;
+
+    for (int i = 0; i < n; ++i) {
+        result += function(a + i * h) * h;
+    }
+
+    return result;
+}
+
+// Example functions that you can use for testing
+double exampleFunction(double x) {
+    return x * x;
+}
+
+int main() {
+    double x, a, b;
+    int n;
+    
+    printf("Enter a value for x: ");
+    scanf("%lf", &x);
+    
+    // Derivative
+    double derivative = calculateDerivative(exampleFunction, x, 0.0001);
+    printf("Derivative at x = %.2f: %.2f\n", x, derivative);
+
+    // Indefinite Integral
+    printf("Enter the range [a, b] for the indefinite integral: ");
+    scanf("%lf %lf", &a, &b);
+    printf("Indefinite Integral from %.2f to %.2f: %.2f\n", a, b, calculateIndefiniteIntegral(exampleFunction, a, b, 1000));
+
+    // Definite Integral
+    printf("Enter the range [a, b] for the definite integral: ");
+    scanf("%lf %lf", &a, &b);
+    printf("Definite Integral from %.2f to %.2f: %.2f\n", a, b, calculateDefiniteIntegral(exampleFunction, a, b, 1000));
+
+    return 0;
+}
