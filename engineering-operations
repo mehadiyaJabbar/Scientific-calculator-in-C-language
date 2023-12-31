@@ -1,0 +1,140 @@
+#include <stdio.h>
+#include <math.h>
+
+// Function declarations
+double add(double a, double b);
+double subtract(double a, double b);
+double multiply(double a, double b);
+double divide(double a, double b);
+double power(double base, double exponent);
+double squareRoot(double num);
+double unitConversion(double value, char fromUnit, char toUnit);
+void polarToRectangular(double magnitude, double angle);
+void rectangularToPolar(double real, double imaginary);
+
+int main() {
+    char operation;
+    double operand1, operand2, result;
+
+    printf("Enter operation (+, -, *, /, ^, r, p, u): ");
+    scanf("%c", &operation);
+
+    switch (operation) {
+        case '+':
+            printf("Enter two numbers: ");
+            scanf("%lf %lf", &operand1, &operand2);
+            result = add(operand1, operand2);
+            printf("Result: %lf\n", result);
+            break;
+
+        case '-':
+            printf("Enter two numbers: ");
+            scanf("%lf %lf", &operand1, &operand2);
+            result = subtract(operand1, operand2);
+            printf("Result: %lf\n", result);
+            break;
+
+        case '*':
+            printf("Enter two numbers: ");
+            scanf("%lf %lf", &operand1, &operand2);
+            result = multiply(operand1, operand2);
+            printf("Result: %lf\n", result);
+            break;
+
+        case '/':
+            printf("Enter two numbers: ");
+            scanf("%lf %lf", &operand1, &operand2);
+            result = divide(operand1, operand2);
+            printf("Result: %lf\n", result);
+            break;
+
+        case '^':
+            printf("Enter base and exponent: ");
+            scanf("%lf %lf", &operand1, &operand2);
+            result = power(operand1, operand2);
+            printf("Result: %lf\n", result);
+            break;
+
+        case 'r':
+            printf("Enter a number for square root: ");
+            scanf("%lf", &operand1);
+            result = squareRoot(operand1);
+            printf("Result: %lf\n", result);
+            break;
+
+        case 'p':
+            printf("Enter magnitude and angle (in degrees) for polar to rectangular conversion: ");
+            scanf("%lf %lf", &operand1, &operand2);
+            polarToRectangular(operand1, operand2);
+            break;
+
+        case 'u':
+            printf("Enter value and units (e.g., m, kg, C) for unit conversion: ");
+            scanf("%lf %c", &operand1, &operand2);
+            result = unitConversion(operand1, operand2, ' ');
+            printf("Result: %lf\n", result);
+            break;
+
+        default:
+            printf("Invalid operation\n");
+    }
+
+    return 0;
+}
+
+// Function definitions
+
+double add(double a, double b) {
+    return a + b;
+}
+
+double subtract(double a, double b) {
+    return a - b;
+}
+
+double multiply(double a, double b) {
+    return a * b;
+}
+
+double divide(double a, double b) {
+    if (b != 0) {
+        return a / b;
+    } else {
+        printf("Error: Division by zero\n");
+        return 0;
+    }
+}
+
+double power(double base, double exponent) {
+    return pow(base, exponent);
+}
+
+double squareRoot(double num) {
+    if (num >= 0) {
+        return sqrt(num);
+    } else {
+        printf("Error: Square root of a negative number is undefined\n");
+        return 0;
+    }
+}
+
+double unitConversion(double value, char fromUnit, char toUnit) {
+    // Add your unit conversion logic here
+    return value;
+}
+
+void polarToRectangular(double magnitude, double angle) {
+    double real, imag;
+
+    // Convert angle from degrees to radians
+    angle = angle * M_PI / 180.0;
+
+    real = magnitude * cos(angle);
+    imag = magnitude * sin(angle);
+
+    printf("Rectangular coordinates: %.2lf + %.2lfi\n", real, imag);
+}
+
+void rectangularToPolar(double real, double imaginary) {
+    // Add your rectangular to polar conversion logic here
+}
